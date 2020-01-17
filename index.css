@@ -1,1 +1,32 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow:hidden;
+}
+#container {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background: yellow;
+    display: grid;  
+    grid-template-columns: repeat(11, 1fr);
+}
+.block {
+    height: 100%;
+    width: 100%;
+    border: 1px solid red;
+}
+.block:nth-child(odd) {
+    background-color: aquamarine;
+}
+.block:nth-child(even) {
+    background: aliceblue;
+}
 
