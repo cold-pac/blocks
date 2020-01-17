@@ -3,6 +3,7 @@
     <head>
         <title>blocks</title>
         <link rel="stylesheet" href="index.css">
+        <script src="tone.js"></script>
     </head>
     <body>
         <div id = "container">
@@ -74,4 +75,55 @@
             <div class="block"></div>
         </div>
     </body>
+    <script>
+
+        let defaultSynth = new Tone.Synth(); //create a new Synth
+        defaultSynth.toMaster();
+
+        let blocks = Array.from(document.getElementsByClassName("block"));
+        let counter = 1; 
+
+        blocks.forEach(elem => {
+            elem.id = counter.toString();
+            counter++;
+        });
+
+        document.getElementById("28").style.backgroundColor = "yellowgreen";
+        
+        let selectedBlock = 28;
+        let synthFrequency = 0; 
+
+        // frequency between 100 and 1000
+        //blocks.length is 66 
+
+        let reRenderSelected = (index, diff) => {
+            if ((selectedBlock + diff) > 0 && (selectedBlock + diff) <= blocks.length) {
+                document.getElementById(selectedBlock.toString()).style.backgroundColor = "";
+                selectedBlock += diff;
+                console.log((1000/blocks.length)*selectedBlock);
+                synthFrequency = (1000/blocks.length)*selectedBlock;
+                defaultSynth.triggerAttackRelease(synthFrequency.toString(), "16n");
+                document.getElementById(selectedBlock.toString()).style.backgroundColor = "yellowgreen";
+            }
+        }
+
+        document.addEventListener('keydown', function(event){
+                console.log(event.key);
+                switch(event.key) {
+                    case "ArrowUp":
+                        reRenderSelected(selectedBlock, -11);
+                        break;
+                    case "ArrowDown":
+                        reRenderSelected(selectedBlock, 11);
+                        break;
+                    case "ArrowRight":
+                        reRenderSelected(selectedBlock, 1);
+                        break;
+                    case "ArrowLeft":
+                        reRenderSelected(selectedBlock, -1);
+                        break;
+                }
+        });
+
+    </script>
 </html>
