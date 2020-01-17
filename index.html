@@ -77,7 +77,19 @@
     </body>
     <script>
 
-        let defaultSynth = new Tone.Synth(); //create a new Synth
+        let defaultSynth = new Tone.Synth(
+        {
+            oscillator : {
+                type : 'sine2',
+            } ,
+            envelope : {
+                attack : 0.01 ,
+                decay : 0.10 ,
+                sustain : 0.10 ,
+                release : 1.20
+            }
+        }
+        ); //create a new Synth
         defaultSynth.toMaster();
 
         let blocks = Array.from(document.getElementsByClassName("block"));
